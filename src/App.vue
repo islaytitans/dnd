@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
-    <app-character-creation></app-character-creation>
-  </div>
+  <div id="app" class="flex items-center justify-center">
+      <app-character-creation></app-character-creation>
+    </div>
 </template>
 
 <script lang="ts">
@@ -11,7 +11,7 @@ import CharacterCreation from "./components/CharacterCreation/CharacterCreation.
 export default Vue.extend({
   name: "App",
   components: {
-    appCharacterCreation: CharacterCreation,
+    appCharacterCreation: CharacterCreation
   }
 });
 </script>
