@@ -1,18 +1,24 @@
 <template>
   <div id="app" class="flex items-center justify-center">
-      <app-character-creation></app-character-creation>
-    </div>
+    <app-character-creation :classList="classes"></app-character-creation>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import CharacterCreation from "./components/CharacterCreation/CharacterCreation.vue";
+import { ClassList } from "@/collections/ClassList";
 
 export default Vue.extend({
   name: "App",
   components: {
-    appCharacterCreation: CharacterCreation
-  }
+    appCharacterCreation: CharacterCreation,
+  },
+  data() {
+    return {
+      classes: ClassList,
+    };
+  },
 });
 </script>
 
