@@ -43,7 +43,7 @@
           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
           id="grid-max-hit-points"
           type="number"
-          v-model="maxHitPoints"
+          v-model="hitPoints"
         />
       </div>
       <div class="w-full md:w-1/2 px-3">
@@ -62,6 +62,7 @@
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <div class="text-center text-gray-700">{{ strengthModifier }}</div>
         <label
           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           for="grid-strength"
@@ -71,10 +72,13 @@
           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
           id="grid-strength"
           type="number"
+          min="8"
+          max="20"
           v-model="strength"
         />
       </div>
       <div class="w-full md:w-1/2 px-3">
+        <div class="text-center text-gray-700">{{ dexterityModifier }}</div>
         <label
           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           for="grid-dexterity"
@@ -84,10 +88,13 @@
           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           id="grid-dexterity"
           type="number"
+          min="8"
+          max="20"
           v-model="dexterity"
         />
       </div>
       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <div class="text-center text-gray-700">{{ constitutionModifier }}</div>
         <label
           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           for="grid-constitution"
@@ -97,10 +104,13 @@
           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
           id="grid-constitution"
           type="number"
+          min="8"
+          max="20"
           v-model="constitution"
         />
       </div>
       <div class="w-full md:w-1/2 px-3">
+        <div class="text-center text-gray-700">{{ wisdomModifier }}</div>
         <label
           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           for="grid-wisdom"
@@ -110,10 +120,13 @@
           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           id="grid-wisdom"
           type="number"
+          min="8"
+          max="20"
           v-model="wisdom"
         />
       </div>
       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <div class="text-center text-gray-700">{{ intelligenceModifier }}</div>
         <label
           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           for="grid-intelligence"
@@ -123,10 +136,13 @@
           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
           id="grid-intelligence"
           type="number"
+          min="8"
+          max="20"
           v-model="intelligence"
         />
       </div>
       <div class="w-full md:w-1/2 px-3">
+        <div class="text-center text-gray-700">{{ charismaModifier }}</div>
         <label
           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           for="grid-charisma"
@@ -136,6 +152,8 @@
           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           id="grid-charisma"
           type="number"
+          min="8"
+          max="20"
           v-model="charisma"
         />
       </div>
@@ -164,12 +182,33 @@ export default Vue.extend({
       constitution: 10,
       wisdom: 10,
       intelligence: 10,
-      charisma: 10
+      charisma: 10,
+      classId: Number
     };
   },
   computed: {
     strengthModifier(): number {
       return this.getModifier(this.strength);
+    },
+    dexterityModifier(): number {
+      return this.getModifier(this.dexterity);
+    },
+    constitutionModifier(): number {
+      return this.getModifier(this.constitution);
+    },
+    wisdomModifier(): number {
+      return this.getModifier(this.wisdom);
+    },
+    intelligenceModifier(): number {
+      return this.getModifier(this.intelligence);
+    },
+    charismaModifier(): number {
+      return this.getModifier(this.charisma);
+    },
+    hitPoints(): number {
+      const characterClass = this.classList[0];
+
+      return characterClass.hitDie + this.constitutionModifier;
     }
   },
   methods: {
