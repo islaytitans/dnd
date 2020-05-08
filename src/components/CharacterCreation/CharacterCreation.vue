@@ -157,14 +157,14 @@ export default Vue.extend({
   },
   data() {
     return {
-      maxHitPoints: Number,
-      armourClass: Number,
-      strength: Number,
-      dexterity: Number,
-      constitution: Number,
-      wisdom: Number,
-      intelligence: Number,
-      charisma: Number
+      maxHitPoints: 10,
+      armourClass: 10,
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      wisdom: 10,
+      intelligence: 10,
+      charisma: 10
     };
   },
   computed: {
